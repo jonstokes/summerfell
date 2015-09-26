@@ -1,0 +1,28 @@
+<nav class="navbar" id="navbar">
+  <div class="container-fluid">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Contact", "mailto:jon@jonstokes.com" %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to('Profile', edit_user_registration_path) %></li>
+              <li><a href="#">Install Status</a></li>
+              <li><a href="#">Support</a></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li><%= link_to('Login', new_user_session_path)  %></li>
+          <li><%= link_to('Register', new_user_registration_path)  %></li>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

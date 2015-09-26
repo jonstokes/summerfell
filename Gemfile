@@ -13,7 +13,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'figaro'
 gem 'bootswatch-rails'
 gem 'bootstrap-sass', '~> 3.3.5'
-
+gem 'devise'
+gem 'troupe'
 
 group :development, :test do
   gem 'byebug'

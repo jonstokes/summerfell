@@ -1,0 +1,81 @@
+<div id="masthead" class="container-fluid">
+  <div class="row">
+    <div id="masthead-text">
+      <div class="center-block">
+          <h1 class="text-center">Summerfell Wireless</h1>
+          <p class="text-center tagline">
+            Your Neighborhood. Your Internet.
+          </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="signup" class="container">
+      <div class="col-xs-4"></div>
+      <div class="col-xs-4 text-center">
+        <%= link_to "Register for free >>", new_user_registration_path, role: "button", class: "btn btn-warning center-block" %>
+      </div>
+      <div class="col-xs-4"></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div id="three-column-pitch" class="col-xs-12 center-block">
+    <div class="row">
+      <div class="col-xs-4">
+        <h2>The Vision</h2>
+        <p>Our goal is to bring high-quality, high-speed, wireless broadband to the Berry Springs area.</p>
+      </div>
+
+      <div class="col-xs-4">
+        <h2>The Plan</h2>
+        <ul>
+          <li><strong>10Mbps/10Mbps</strong> wireless Internet (see below for more details)</li>
+          <li><strong>$100</strong> per month (plus a one-time $210 equipment purchase fee.)</li>
+          <li><strong>No contract</strong></li>
+          <li><strong>No quotas</strong> or caps</li>
+          <li><strong>Neighborhood</strong> customer service</li>
+        </ul>
+      </div>
+
+      <div class="col-xs-4">
+        <h2>Interested?</h2>
+        <p>
+          <%= link_to "Create a free account", new_user_registration_path %>, and we'll notify you when you can offically
+          sign up for service by submitting a credit card for payment.
+        </p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <h2>Details</h2>
+      <p>
+        We're going to run a fast Ethernet line into Berry Springs RV Park, and then distribute
+        the bandwidth wirelessly to subscribers in the area using a mesh of ~$200 outdoor, rooftop-mounted antennas.
+
+        If we can get just ten customers to sign up for the proposed 10Mbps plan outlined above,
+        then Summerfell Wireless will handle the purchase and install of the necessary equipment,
+        as well as sign any contracts and provide the initial investment to make this work.
+      </p>
+
+
+      <h2>Who We Are</h2>
+      <p>
+        Right now, "we" is really just me, <%= link_to "Jon Stokes", "http://jonstokes.com/" %>, of 1101 Grove Ln.
+        I'm a seasoned entrepreneur and tech veteran who has moved out to the Georgetown area with my family
+        to escape an increasingly crowded downtown Austin. I and the neighbors that I've talked to are
+        tired of paying too much for too little connectivity from cellular and satellite providers, so I've
+        decided to do something about it by setting up a locally owned and operated WISP.
+      </p>
+    </div>
+
+    <hr>
+
+    <p><em>Copyright 2015, Odd Won Out, LLC.</em></p>
+    <br><br><br>
+  </div>
+</div>

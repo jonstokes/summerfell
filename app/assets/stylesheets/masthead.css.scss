@@ -1,0 +1,37 @@
+#navbar{
+  margin-bottom: 0px;
+}
+
+#masthead{
+  height: 450px;
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(summerfell-header.jpg);
+  h1 {
+    font-size: 50pt;
+    color: white;
+    font-weight: bold;
+  }
+  .tagline {
+    color: white;
+    font-weight: bold;
+    font-size: 20pt;
+    font-style: italic;
+  }
+
+  #masthead-text{
+    padding-top: 90px;
+  }
+
+  #signup{
+    margin-top: 40px;
+    width: 50%;
+  }
+}
+
+#three-column-pitch{
+  padding: 0px 150px 0px 150px;
+}
