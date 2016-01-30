@@ -11,11 +11,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926135336) do
+ActiveRecord::Schema.define(version: 20160130035123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "billing_informations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "user_id",                                  null: false
+    t.string   "billing_phone",                limit: 255
+    t.string   "billing_token",                limit: 255, null: false
+    t.string   "cc_full_name",                 limit: 255, null: false
+    t.string   "cc_last_4",                    limit: 255, null: false
+    t.string   "cc_expiry_month",              limit: 255, null: false
+    t.string   "cc_expiry_year",               limit: 255, null: false
+    t.string   "billing_address_company_name", limit: 255
+    t.string   "billing_address_full_name",    limit: 255, null: false
+    t.string   "billing_address_street",       limit: 255, null: false
+    t.string   "billing_address_unit",         limit: 255
+    t.string   "billing_address_city",         limit: 255, null: false
+    t.string   "billing_address_state",        limit: 255, null: false
+    t.string   "billing_address_zip_code",     limit: 255, null: false
+    t.string   "billing_address_country",      limit: 255, null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "billing_informations", ["user_id"], name: "index_billing_informations_on_user_id", using: :btree
+
+  create_table "mac_addresses", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "user_id"
+    t.macaddr  "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "service_informations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "user_id",                                  null: false
+    t.integer  "package",                                  null: false
+    t.string   "service_phone",                limit: 255
+    t.string   "service_address_company_name", limit: 255
+    t.string   "service_address_full_name",    limit: 255, null: false
+    t.string   "service_address_street",       limit: 255, null: false
+    t.string   "service_address_unit",         limit: 255
+    t.string   "service_address_city",         limit: 255, null: false
+    t.string   "service_address_state",        limit: 255, null: false
+    t.string   "service_address_zip_code",     limit: 255, null: false
+    t.string   "service_address_country",      limit: 255, null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "service_informations", ["user_id"], name: "index_service_informations_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,14 +77,6 @@ ActiveRecord::Schema.define(version: 20150926135336) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "phone"
-    t.string   "address_line_1"
-    t.string   "address_line_2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

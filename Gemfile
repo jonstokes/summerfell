@@ -15,6 +15,7 @@ gem 'bootswatch-rails'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'devise'
 gem 'troupe'
+gem 'money-rails', '~> 1.4.1'
 gem 'unifi', path: '../ci/unifi', branch: 'js-basic-auth'
 
 group :development, :test do
