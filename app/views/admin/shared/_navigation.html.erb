@@ -1,0 +1,16 @@
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+  <ul class="nav navbar-nav side-nav">
+    <li <%= 'class=active' if controller_name == "admin/guests" %>>
+      <%= link_to admin_guests_path do %>
+        <%= icon('users', class: "fa-fw") %>&nbsp;Guests
+      <%  end %>
+    </li>
+    <li <%= 'class=active' if controller_name == "admin/packages" %>>
+      <%= link_to admin_packages_path do %>
+        <%= icon('globe', class: "fa-fw") %>&nbsp;Packages
+      <%  end %>
+    </li>
+  </ul>
+</div>
+<!-- /.navbar-collapse -->
