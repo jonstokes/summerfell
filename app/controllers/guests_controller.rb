@@ -8,7 +8,7 @@ class GuestsController < ApplicationController
   # POST /guests
   # POST /guests.json
   def create
-    create_guest = CreateGuest.call(
+    create_guest = CreateHotspotGuest.call(
       guest_params: guest_params,
       transaction_information_params: transaction_information_params
     )
@@ -18,6 +18,7 @@ class GuestsController < ApplicationController
       if create_guest.success?
         format.html { redirect_to params[:url] }
       else
+        notice = create_guest.error
         format.html { render :new }
       end
     end
