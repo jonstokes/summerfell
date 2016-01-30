@@ -18,6 +18,7 @@ gem 'troupe'
 gem 'money-rails', '~> 1.4.1'
 gem 'virtus'
 gem 'troupe'
+gem 'mac_address'
 gem 'unifi', path: '../ci/unifi', branch: 'js-basic-auth'
 
 group :development, :test do
@@ -29,6 +30,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.2'
   gem 'pry'
   gem 'rspec-rails'
+  gem 'forgery'
 end
 
 

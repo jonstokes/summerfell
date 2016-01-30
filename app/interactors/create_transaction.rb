@@ -19,6 +19,7 @@ class CreateTransaction
   end
 
   def call
+    return if guest.plan.free?
     context.fail!(error: transaction.errors) unless transaction.valid?
   end
 end

@@ -32,7 +32,7 @@ class GuestsController < ApplicationController
     end
 
     def transaction_information_params
-      params.require(:transaction_information).permit(
+      params[:transaction_information].permit(
         :cc_number,
         :security_code,
         :cc_expiry_month,

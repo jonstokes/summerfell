@@ -1,11 +1,11 @@
 class HotspotController < ApplicationController
   def guest
-    # This just picks up the webhook and redirects to create the guest_params
-    
-    # From https://community.ubnt.com/t5/UniFi-Wireless/external-hotspot-portal/td-p/419845
-    # http://hostname/guest/?id=20:aa:4b:95:bc:9d&ap=00:27:22:e4:ce:79&t=1363610350&url=http://facebook.com/&ssid=Test%20SSID
+    # This just picks up the webhook, parses it, and redirects to show
+    # the actual splash page where plans are picked
 
-    # Display the packages available
+    # From https://community.ubnt.com/t5/UniFi-Wireless/external-hotspot-portal/td-p/419845
+    # /guest/?id=20:aa:4b:95:bc:9d&ap=00:27:22:e4:ce:79&t=1363610350&url=http://facebook.com/&ssid=Test%20SSID
+
     redirect_to new_guest_path(
       guest_mac: guest_params[:id],
       access_point_mac: guest_params[:ap],
