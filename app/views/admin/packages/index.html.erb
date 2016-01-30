@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Admin Packages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_packages.each do |admin_package| %>
+      <tr>
+        <td><%= link_to 'Show', admin_package %></td>
+        <td><%= link_to 'Edit', edit_admin_package_path(admin_package) %></td>
+        <td><%= link_to 'Destroy', admin_package, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Package', new_admin_package_path %>
