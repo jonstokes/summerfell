@@ -15,7 +15,7 @@ gem 'bootswatch-rails'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'devise'
 gem 'troupe'
-gem 'unifi', git: 'http://github.com/collectiveidea/unifi.git'
+gem 'unifi', path: '../ci/unifi', branch: 'js-basic-auth'
 
 group :development, :test do
   gem 'byebug'
