@@ -4,7 +4,16 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   root 'homepage#index'
-  
+
+  resources :guests, only: [:new, :create]
+
+  get "/guest" => "hotspot#guest"
+
+  namespace :admin do
+    resources :guests
+    resources :packages
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
