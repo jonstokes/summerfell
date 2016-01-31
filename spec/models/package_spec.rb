@@ -75,4 +75,33 @@ RSpec.describe Package, type: :model do
       expect(subject).not_to be_valid
     end
   end
+
+  context "scopes" do
+    before do
+      create(:package, price_cents: 0)
+      create(:package, price_cents: 100)
+    end
+
+    describe "free" do
+      it "only returns free plans" do
+        expect(Package.free.count).to eq(1)
+      end
+    end
+
+    describe "paid" do
+      it "only returns paid plans" do
+        expect(Package.paid.count).to eq(1)
+      end
+    end
+  end
+
+  describe "#free?" do
+    let(:free) { create(:package, price: 0) }
+    let(:paid) { create(:package, price: 100) }
+
+    it "returns true if the package is free, false if paid" do
+      expect(free.free?).to eq(true)
+      expect(paid.free?).to eq(false)
+    end
+  end
 end

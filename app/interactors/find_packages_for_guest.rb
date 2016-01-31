@@ -9,7 +9,7 @@ class FindPackagesForGuest
     packages = if Guest.find_by(device_address: device_address, package_id: Package.free.pluck(:id))
       Package.paid
     else
-      Package.all.sort("price_cents DESC")
+      Package.order("price_cents DESC")
     end
   end
 end

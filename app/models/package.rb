@@ -1,6 +1,8 @@
 class Package < ActiveRecord::Base
-  scope :paid, -> { where("price_cents > 0").sort("price_cents DESC") }
-  scope :free, -> { where("price_cents = 0") }
+  monetize :price_cents
+
+  scope :paid, -> { where("price_cents > '0.0'::money").order("price_cents DESC") }
+  scope :free, -> { where("price_cents = '0.0'::money") }
 
   validates :name, :description, :charged_as, presence: true
   validates :price_cents, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
