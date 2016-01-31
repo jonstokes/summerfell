@@ -9,14 +9,12 @@ class Guest < ActiveRecord::Base
   validate :valid_access_point_address
 
   def valid_device_address
-    return true unless device_address.present?
-    return true if device_address.valid_mac?(strict: true)
+    return true if !device_address.present? || device_address.valid_mac?(strict: true)
     errors.add(:device_address, "Invalid MAC format.")
   end
 
   def valid_access_point_address
-    return true unless access_point_address.present?
-    return true if access_point_address.valid_mac?(strict: true)
+    return true if !access_point_address.present? || access_point_address.valid_mac?(strict: true)
     errors.add(:access_point_address, "Invalid MAC format.")
   end
 end
