@@ -13,7 +13,7 @@ class CreateTransaction
       :currency        => guest.package.currency,
       :account         => {
         :account_code => guest.id,
-        :billing_info => transaction_info.billing_info
+        :billing_info => transaction_info.to_recurly_billing_info
       }
     )
   end

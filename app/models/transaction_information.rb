@@ -15,7 +15,7 @@ class TransactionInformation
   attribute :zip
   attribute :country
 
-  def billing_info
+  def to_recurly_billing_info
     {
       first_name: first_name,
       last_name: last_name,
