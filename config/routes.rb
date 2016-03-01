@@ -14,6 +14,13 @@ Rails.application.routes.draw do
     resources :packages
   end
 
+  namespace :api, path: "", defaults: {format: :json}  do
+    namespace :v1 do
+      resources :guest, only: [:create]
+      get "/packages/available" => "packages#available"
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

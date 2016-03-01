@@ -1,11 +1,4 @@
-class GuestsController < ApplicationController
-  # GET /guests/new
-  def new
-    @packages = FindPackagesForGuest.call(device_address: params[:guest_mac]).packages
-    @guest = Guest.new
-  end
-
-  # POST /guests
+class API::V1::GuestsController < API::V1::BaseController
   # POST /guests.json
   def create
     create_guest = CreateHotspotGuest.call(
@@ -16,10 +9,9 @@ class GuestsController < ApplicationController
 
     respond_to do |format|
       if create_guest.success?
-        format.html { redirect_to params[:url] }
+        format.json { json: { status: :success } }
       else
-        notice = create_guest.error
-        format.html { render :new }
+        format.json { json: { status: :failure, error: create_guest.error } }
       end
     end
   end
