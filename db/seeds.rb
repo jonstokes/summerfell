@@ -3,7 +3,7 @@ Package.create(
   charged_as: "30 Days WiFi Hotspot",
   price_cents: 8999,
   currency: 'USD',
-  description: "30 days of high-speed WiFi on the Summerfell Turbo network.",
+  description: "30 days of high-speed (10Mbps up and down) WiFi on the Summerfell Turbo network. No download quotas.",
   duration_minutes: 30.days.to_i / 60,
   limit_up: 10000,
   limit_down: 10000
@@ -14,7 +14,7 @@ Package.create(
   charged_as: "1 Week WiFi Hotspot",
   price_cents: 2499,
   currency: 'USD',
-  description: "1 week of high-speed WiFi on the Summerfell Turbo network.",
+  description: "1 week of high-speed (10Mbps up and down) WiFi on the Summerfell Turbo network. No download quotas.",
   duration_minutes: 1.weeks.to_i / 60,
   limit_up: 10000,
   limit_down: 10000
@@ -25,7 +25,7 @@ Package.create(
   charged_as: "1 Day WiFi Hotspot",
   price_cents: 899,
   currency: 'USD',
-  description: "1 day of high-speed WiFi on the Summerfell Turbo network.",
+  description: "1 day of high-speed (10Mbps up and down) WiFi on the Summerfell Turbo network. No download quotas.",
   duration_minutes: 1.days.to_i / 60,
   limit_up: 10000,
   limit_down: 10000

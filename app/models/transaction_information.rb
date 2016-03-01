@@ -1,5 +1,6 @@
 class TransactionInformation
   include Virtus.model
+  include ActiveModel::Model
 
   attribute :cc_number
   attribute :security_code
@@ -14,6 +15,13 @@ class TransactionInformation
   attribute :state
   attribute :zip
   attribute :country
+
+  validates :first_name, :last_name,    presence: true
+  validates :cc_number, :security_code, presence: true
+  validates :cc_expiry_month,           presence: true
+  validates :cc_expiry_year,            presence: true
+  validates :city, :state, :zip,        presence: true
+  validates :state,                     presence: true
 
   def to_recurly_billing_info
     {
