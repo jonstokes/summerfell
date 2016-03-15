@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   namespace :api, path: "", defaults: {format: :json}  do
     namespace :v1 do
-      resources :guest, only: [:create] 
+      resources :guest, only: [:create, :authorize] 
       get "/packages/available" => "packages#available"
     end
   end

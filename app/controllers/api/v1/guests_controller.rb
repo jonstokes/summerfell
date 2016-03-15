@@ -17,6 +17,17 @@ class API::V1::GuestsController < API::V1::BaseController
     end
   end
 
+  def authorize
+    respond_to do |format|
+      if Guest.find_by(device_address: params[:id])
+        format.json { json: { status: :success } }
+      else
+        # TODO: Errors serializer
+        format.json { json: { status: :failure } }
+      end
+    end
+  end
+
   private
 
     # Never trust parameters from the scary internet, only allow the white list through.
