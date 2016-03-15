@@ -28,5 +28,9 @@ RSpec.describe Guest, type: :model do
       subject.package_id = nil
       expect(subject).not_to be_valid
     end
+
+    it "does not let a guest use a free package if their free package time is up" do
+      expect(false).to eq(true)
+    end
   end
 end
