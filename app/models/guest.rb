@@ -8,7 +8,7 @@ class Guest < ActiveRecord::Base
   validate :valid_device_address
   validate :valid_access_point_address
 
-  validates :guest_can_use_free_package, if: ->{ package_id == Figaro.env.free_package_id }
+  validate :guest_can_use_free_package?, if: ->{ package_id == Figaro.env.free_package_id }
 
   def guest_can_use_free_package?
     # TODO: Check to see if this guy has already used a free package
