@@ -19,7 +19,7 @@ gem 'money-rails', '~> 1.4.1'
 gem 'virtus'
 gem 'troupe'
 gem 'mac_address'
-gem 'unifi', path: '../ci/unifi', branch: 'js-basic-auth'
+gem 'unifi', git: 'http://github.com/collectiveidea/unifi.git', branch: 'master'
 
 group :development, :test do
   gem 'byebug'
@@ -27,14 +27,13 @@ group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'factory_girl_rails', '~> 4.2'
-  gem 'rspec-rails'
   gem 'forgery'
 end
-
-
 group :test do
+  gem 'factory_girl_rails', '~> 4.2'
+  gem 'rspec-rails'
   gem 'database_cleaner', '~> 1.0'
+  gem 'webmock'
 end
 
 
