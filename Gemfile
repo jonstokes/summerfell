@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.2.3'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -17,9 +16,9 @@ gem 'devise'
 gem 'troupe'
 gem 'money-rails', '~> 1.4.1'
 gem 'virtus'
-gem 'troupe'
 gem 'mac_address'
 gem 'unifi', git: 'http://github.com/collectiveidea/unifi.git', branch: 'master'
+gem 'nokogiri', '~> 1.6.7.2'
 
 group :development, :test do
   gem 'byebug'
