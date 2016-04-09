@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.2.3'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
@@ -16,6 +15,7 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem 'devise'
 gem 'troupe'
 gem 'nokogiri', '1.6.7.2'
+gem 'puma'
 
 group :development, :test do
   gem 'byebug'
@@ -28,6 +28,13 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+group :development do
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
+end
 
 group :test do
   gem 'database_cleaner', '~> 1.0'
