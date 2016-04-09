@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: summerfell_development
+
+test:
+  <<: *default
+  database: summerfell_test
+
+production:
+  <<: *default
+  database: summerfell_production
+  username: summerfell
+  password: <%= ENV['SUMMERFELL_DATABASE_PASSWORD'] %>
