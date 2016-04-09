@@ -1,43 +1,49 @@
-Package.create(
-  name: "30 Days Hotspot Access",
-  charged_as: "30 Days WiFi Hotspot",
-  price_cents: 8999,
-  currency: 'USD',
-  description: "30 days of high-speed (10Mbps up and down) WiFi on the Summerfell Turbo network. No download quotas.",
-  duration_minutes: 30.days.to_i / 60,
-  limit_up: 10000,
-  limit_down: 10000
-)
-
-Package.create(
-  name: "1 Week Hotspot Access",
-  charged_as: "1 Week WiFi Hotspot",
-  price_cents: 2499,
-  currency: 'USD',
-  description: "1 week of high-speed (10Mbps up and down) WiFi on the Summerfell Turbo network. No download quotas.",
-  duration_minutes: 1.weeks.to_i / 60,
-  limit_up: 10000,
-  limit_down: 10000
-)
-
-Package.create(
-  name: "1 Day Hotspot Access",
-  charged_as: "1 Day WiFi Hotspot",
-  price_cents: 899,
-  currency: 'USD',
-  description: "1 day of high-speed (10Mbps up and down) WiFi on the Summerfell Turbo network. No download quotas.",
-  duration_minutes: 1.days.to_i / 60,
-  limit_up: 10000,
-  limit_down: 10000
-)
-
-Package.create(
-  name: "2 Hours Free Trial Hotspot Access",
-  charged_as: "2 Hour Free Trial",
-  price_cents: 0,
-  currency: 'USD',
-  description: "2 hours of high-speed WiFi on the Summerfell Turbo network.",
-  duration_minutes: 120,
-  limit_up: 10000,
-  limit_down: 10000
-)
+[
+  {
+    id: (Figaro.env.free_package_id || SecureRandom.uuid),
+    name: "Free 2-hour Turbo WiFi",
+    description: "Two hours of free Turbo WiFi (10Mbps/10Mbps, no quotas)",
+    charged_as: "SUMMERFELL.COM FREE WiFi HOTSPOT",
+    price_cents: 0,
+    duration_minutes: (2.hours / 60),
+    limit_up: 10,
+    limit_down: 10,
+    currency: 'USD'
+  },
+  {
+    name: "8-hour Turbo WiFi",
+    description: "Eight hours of Turbo WiFi (10Mbps/10Mbps, no quotas)",
+    charged_as: "SUMMERFELL.COM 8-hour WiFi HOTSPOT",
+    price_cents: 799,
+    duration_minutes: (8.hours / 60),
+    limit_up: 10,
+    limit_down: 10,
+    currency: 'USD'
+  },
+  {
+    name: "24-hour Turbo WiFi",
+    description: "24 hours of Turbo WiFi (10Mbps/10Mbps, no quotas)",
+    charged_as: "SUMMERFELL.COM 24-hour WiFi HOTSPOT",
+    price_cents: 1299,
+    duration_minutes: (24.hours / 60),
+    limit_up: 10,
+    limit_down: 10,
+    currency: 'USD'
+  },
+  {
+    name: "1 Week Turbo WiFi",
+    description: "7 days of Turbo WiFi (10Mbps/10Mbps, no quotas)",
+    charged_as: "SUMMERFELL.COM 1-Week WiFi HOTSPOT",
+    price_cents: 2495,
+    duration_minutes: (24.hours * 7 / 60),
+    limit_up: 10,
+    limit_down: 10,
+    currency: 'USD'
+  }
+].each do |params|
+  if package = Package.find_by(name: params[:name])
+    package.update(params)
+  else
+    Package.create(params)
+  end
+end
