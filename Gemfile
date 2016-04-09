@@ -23,7 +23,6 @@ gem 'unifi', git: 'http://github.com/collectiveidea/unifi.git', branch: 'master'
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -31,6 +30,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'web-console', '~> 2.0'
   gem 'capistrano'
   gem 'capistrano3-puma'
   gem 'capistrano-rails', require: false
