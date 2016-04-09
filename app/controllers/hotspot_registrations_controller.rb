@@ -8,7 +8,10 @@ class HotspotRegistrationsController < ApplicationController
 
   # GET /hotspot_registrations/new
   def new
-    @hotspot_registration = HotspotRegistration.find_by_device_address(params[:id]) || HotspotRegistration.new
+    @hotspot_registration = HotspotRegistration.find_by_device_address(params[:id]) || HotspotRegistration.new(
+      device_address: hotspot_registration_params[:id],
+      access_point_address: hotspot_registration_params[:ap]
+    )
 
     respond_to do |format|
       if @hotspot_registration.authorized?
@@ -41,7 +44,17 @@ class HotspotRegistrationsController < ApplicationController
     end
   end
 
+  def packages
+    if @hotspot_registration.can_use_free_package?
+      Package.order("price_cents ASC").to_a
+    else
+      Package.paid.order("price_cents ASC").to_a
+    end
+  end
+  helper_method :packages
+
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_hotspot_registration
       @hotspot_registration = HotspotRegistration.find(params[:id])

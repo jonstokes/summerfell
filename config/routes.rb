@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   root 'homepage#index'
 
-  get "/guest/s/default/" => "portals#guest"
+  get "/guest/s/default/" => "hotspot_registrations#new"
 
   namespace :admin do
     resources :guests

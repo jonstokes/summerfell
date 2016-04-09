@@ -2,7 +2,7 @@
 
 <%= javascript_include_tag "https://js.stripe.com/v2/" %>
 
-<script>Stripe.setPublishableKey('#{Rails.application.secrets.stripe_publishable_key}');</script>
+<script>Stripe.setPublishableKey('#{Figaro.env.stripe_publishable_key}');</script>
 
 <%= form_for @hotspot_registration, html: { class: "basic-grey" } do |f| %>
   <% if @hotspot_registration.errors.any? %>
@@ -18,21 +18,31 @@
   <% end %>
 
   <div>
-    <%= f.hidden_field :device_address, value: @device_address %>
-    <%= f.hidden_field :access_point_address, value: @access_point_address %>
-    <%= f.hidden_field :url, value: @url %>
+    <%= f.hidden_field :card_token %>
+    <%= f.hidden_field :device_address %>
+    <%= f.hidden_field :access_point_address %>
   </div>
 
+  <p style="margin-bottom: 20px;">
+    Choose a WiFi access package from options below. All Summerfell Turbo packages are 10Mbps/10Mbps, with no download quotas.
+  </p>
+
   <div class="form-group">
-    <%= f.label :package_id %><br />
-    <% @packages.each do |package| %>
-      <%= f.radio_button :package_id, package.id, class: "form-control" %> <%= package.name %><br />
+    <% packages.each do |package| %>
+      <div class="radio" style="margin-left: 30px; padding-bottom: 10px;">
+        <%= f.radio_button :package_id, package.id %>
+        <%= f.label :package_id do %>
+          <strong><%= package.name %></strong>&nbsp; &mdash; &nbsp; $<%= package.price %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 
   <div class="form-group">
-    <%= f.label :terms, 'I Accept the Terms and Conditions' %><br />
-    <%= f.check_box :terms, class: "form-control" %>
+    <div class="checkbox" style="margin-left: 30px; padding-bottom: 10px;">
+      <%= f.check_box :terms %>
+      <%= f.label :terms, 'I Accept the Terms and Conditions' %><br />
+    </div>
   </div>
 
   <div class="form-group">
