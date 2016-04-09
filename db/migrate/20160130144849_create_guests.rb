@@ -5,7 +5,8 @@ class CreateGuests < ActiveRecord::Migration
       t.macaddr :access_point_address, null: false
       t.uuid    :package_id, null: false
       t.string  :email
-
+      t.boolean :terms, null: false
+      
       t.timestamps null: false
     end
 

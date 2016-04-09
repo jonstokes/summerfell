@@ -1,7 +1,36 @@
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<script>
+  var handler = StripeCheckout.configure({
+    key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
+    image: '/img/documentation/checkout/marketplace.png',
+    locale: 'auto',
+    token: function(token) {
+      // Use the token to create the charge with a server-side script.
+      // You can access the token ID with `token.id`
+    }
+  });
+
+  $('#customButton').on('click', function(e) {
+    // Open Checkout with further options
+    handler.open({
+      name: 'Stripe.com',
+      description: '2 widgets',
+      amount: 2000
+    });
+    e.preventDefault();
+  });
+
+  // Close Checkout on page navigation
+  $(window).on('popstate', function() {
+    handler.close();
+  });
+</script>
+
 <%= form_for(@guest) do |f| %>
   <% if @guest.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@guest.errors.count, "error") %> prohibited this guest from being saved:</h2>
+      <h2><%= pluralize(@guest.errors.count, "error") %> were found in this form:</h2>
 
       <ul>
       <% @guest.errors.full_messages.each do |message| %>
@@ -11,7 +40,27 @@
     </div>
   <% end %>
 
+  <div>
+    <%= f.hidden :device_address, value: @device_address %>
+    <%= f.hidden :access_point_address, value: @access_point_address %>
+    <%= f.hidden :url, value: @url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :package_id %><br />
+    <% @packages.each do |package| %>
+      <%= f.radio_button :package_id, package.id %> <%= package.name %><br />
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :terms, 'I Accept the Terms and Conditions' %><br />
+    <%= f.check_box :terms %>
+  </div>
+
   <div class="actions">
+    <button id="customButton">Purchase</button>
+
     <%= f.submit %>
   </div>
 <% end %>

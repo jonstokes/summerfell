@@ -4,7 +4,8 @@ class Guest < ActiveRecord::Base
   validates :package_id, presence: true
   validates :device_address, presence: true
   validates :access_point_address, presence: true
-
+  validates :terms, :inclusion => {:in => [true, false]}
+  
   validate :valid_device_address
   validate :valid_access_point_address
 
