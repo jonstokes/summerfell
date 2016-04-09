@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root 'homepage#index'
 
-  get "/guest" => "portals#guest"
+  get "/guest/s/default/" => "portals#guest"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
