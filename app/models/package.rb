@@ -1,4 +1,6 @@
 class Package < ActiveRecord::Base
+  has_many :guests
+  
   monetize :price_cents
 
   scope :paid, -> { where("price_cents > '0.0'::money").order("price_cents DESC") }

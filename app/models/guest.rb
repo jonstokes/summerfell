@@ -1,6 +1,7 @@
 class Guest < ActiveRecord::Base
   belongs_to :package
-
+  belongs_to :transaction
+  
   validates :package_id, presence: true
   validates :device_address, presence: true
   validates :access_point_address, presence: true
@@ -10,7 +11,7 @@ class Guest < ActiveRecord::Base
 
   validate :guest_can_use_free_package?, if: ->{ package_id == Figaro.env.free_package_id }
 
-  def guest_can_use_free_package?
+  def can_use_free_package?
     # TODO: Check to see if this guy has already used a free package
     true
   end
