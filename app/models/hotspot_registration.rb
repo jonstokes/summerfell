@@ -16,7 +16,7 @@ class HotspotRegistration < ActiveRecord::Base
 
     Stripe::Charge.create(
       customer:    customer.id,
-      amount:      package.price_cents,
+      amount:      package.price_cents.to_i,
       description: package.name,
       currency:    'usd'
     )

@@ -25,12 +25,7 @@ class HotspotRegistrationsController < ApplicationController
   # POST /hotspot_registrations
   # POST /hotspot_registrations.json
   def create
-    @hotspot_registration = HotspotRegistration.new(
-      hotspot_registration_params.merge(
-        email: stripe_params["stripeEmail"],
-        card_token: stripe_params["stripeToken"]
-      )
-    )
+    @hotspot_registration = HotspotRegistration.new(hotspot_registration_params[:hotspot_registration])
 
     respond_to do |format|
       if @hotspot_registration.valid?
@@ -62,6 +57,6 @@ class HotspotRegistrationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotspot_registration_params
-      params.permit(:id, :ap, :url, hotspot_registration: [:device_address, :access_point_address, :url, :email, :card_token])
+      params.permit(:id, :ap, :url, hotspot_registration: [:package_id, :terms, :device_address, :access_point_address, :url, :email, :card_token])
     end
 end

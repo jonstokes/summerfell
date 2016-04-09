@@ -2,7 +2,7 @@
 
 <%= javascript_include_tag "https://js.stripe.com/v2/" %>
 
-<script>Stripe.setPublishableKey('#{Figaro.env.stripe_publishable_key}');</script>
+<script>Stripe.setPublishableKey('<%= Figaro.env.stripe_publishable_key %>');</script>
 
 <%= form_for @hotspot_registration, html: { class: "basic-grey" } do |f| %>
   <% if @hotspot_registration.errors.any? %>
@@ -43,6 +43,11 @@
       <%= f.check_box :terms %>
       <%= f.label :terms, 'I Accept the Terms and Conditions' %><br />
     </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "form-control", "data-stripe" => "email" %>
   </div>
 
   <div class="form-group">
