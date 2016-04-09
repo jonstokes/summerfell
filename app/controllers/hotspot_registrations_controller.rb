@@ -1,5 +1,5 @@
 class HotspotRegistrationsController < ApplicationController
-  before_action :set_hotspot_registration, only: [:show, :edit, :update, :destroy]
+  before_action :set_hotspot_registration, only: [:show]
 
   # GET /hotspot_registrations/1
   # GET /hotspot_registrations/1.json
@@ -8,21 +8,35 @@ class HotspotRegistrationsController < ApplicationController
 
   # GET /hotspot_registrations/new
   def new
-    @hotspot_registration = HotspotRegistration.new
+    @hotspot_registration = HotspotRegistration.find_by_device_address(params[:id]) || HotspotRegistration.new
+
+    respond_to do |format|
+      if @hotspot_registration.authorized?
+        format.html { render :thank_you }
+      else
+        format.html { render :new }
+      end
+    end
   end
 
   # POST /hotspot_registrations
   # POST /hotspot_registrations.json
   def create
-    @hotspot_registration = HotspotRegistration.new(hotspot_registration_params)
+    @hotspot_registration = HotspotRegistration.new(
+      hotspot_registration_params.merge(
+        email: stripe_params["stripeEmail"],
+        card_token: stripe_params["stripeToken"]
+      )
+    )
 
     respond_to do |format|
-      if @hotspot_registration.save
+      if @hotspot_registration.valid?
+        @hotspot_registration.process_payment
+        @hotspot_registration.save
+
         format.html { redirect_to @hotspot_registration, notice: 'Hotspot registration was successfully created.' }
-        format.json { render :show, status: :created, location: @hotspot_registration }
       else
         format.html { render :new }
-        format.json { render json: @hotspot_registration.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -35,6 +49,6 @@ class HotspotRegistrationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotspot_registration_params
-      params.fetch(:hotspot_registration, {})
+      params.permit(:id, :ap, :url, hotspot_registration: [:device_address, :access_point_address, :url, :email, :card_token])
     end
 end

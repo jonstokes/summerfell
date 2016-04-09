@@ -11,6 +11,17 @@ class HotspotRegistration < ActiveRecord::Base
 
   validate :valid_for_free_package, if: ->{ package_id == Package.free.id }
 
+  def process_payment
+    customer = Stripe::Customer.create(email: email, card: card_token)
+
+    Stripe::Charge.create(
+      customer:    customer.id,
+      amount:      package.price_cents,
+      description: package.name,
+      currency:    'usd'
+    )
+  end
+
   def authorized?
     Time.current >= expires_at
   end

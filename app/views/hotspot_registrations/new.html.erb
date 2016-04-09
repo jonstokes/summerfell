@@ -1,5 +1,57 @@
-<h1>New Hotspot Registration</h1>
+<h1>Summerfell Turbo WiFi Registration</h1>
 
-<%= render 'form' %>
+<%= javascript_include_tag "https://js.stripe.com/v2/" %>
 
-<%= link_to 'Back', hotspot_registrations_path %>
+<script>Stripe.setPublishableKey('#{Rails.application.secrets.stripe_publishable_key}');</script>
+
+<%= form_for @hotspot_registration, html: { class: "basic-grey" } do |f| %>
+  <% if @hotspot_registration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hotspot_registration.errors.count, "error") %> prohibited this hotspot_registration from being saved:</h2>
+
+      <ul>
+      <% @hotspot_registration.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.hidden_field :device_address, value: @device_address %>
+    <%= f.hidden_field :access_point_address, value: @access_point_address %>
+    <%= f.hidden_field :url, value: @url %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :package_id %><br />
+    <% @packages.each do |package| %>
+      <%= f.radio_button :package_id, package.id, class: "form-control" %> <%= package.name %><br />
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :terms, 'I Accept the Terms and Conditions' %><br />
+    <%= f.check_box :terms, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag "Card Number", nil, required: true %>
+    <%= text_field_tag :card_number, nil, class: "form-control", "data-stripe" => "number" %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag "Card Verification", nil, required: true %>
+    <%= text_field_tag :card_verification, nil, class: "form-control", "data-stripe" => "cvv" %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag "Card Expires", nil, required: true %>
+    <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, "data-stripe" => "exp-month", class: "form-control" %>
+    <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, "data-stripe" => "exp-year", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Registration Payment", class: "btn btn-default", style: "color: white;background: rgb(242, 118, 73);" %>
+  </div>
+<% end %>
