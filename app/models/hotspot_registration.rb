@@ -24,7 +24,7 @@ class HotspotRegistration < ActiveRecord::Base
 
   def authorized?
     return false unless package
-    Time.current >= expires_at
+    expires_at >= Time.current
   end
 
   def expires_at

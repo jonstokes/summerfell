@@ -5,17 +5,19 @@
 <script>Stripe.setPublishableKey('<%= Figaro.env.stripe_publishable_key %>');</script>
 
 <%= form_for @hotspot_registration, html: { class: "basic-grey" } do |f| %>
-  <% if @hotspot_registration.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@hotspot_registration.errors.count, "error") %> prohibited this hotspot_registration from being saved:</h2>
-
-      <ul>
-      <% @hotspot_registration.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div id="flash-messages">
+    <% if @hotspot_registration.errors.any? %>
+      <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <i class="fa fa-info-circle"></i><%= flash[:error] || flash[:alert] %>
+        <ul>
+          <% @hotspot_registration.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
 
   <div>
     <%= f.hidden_field :card_token %>

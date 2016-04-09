@@ -8,15 +8,16 @@ class HotspotRegistrationsController < ApplicationController
 
   # GET /hotspot_registrations/new
   def new
-    @hotspot_registration = HotspotRegistration.find_by_device_address(params[:id]) || HotspotRegistration.new(
-      device_address: hotspot_registration_params[:id],
-      access_point_address: hotspot_registration_params[:ap]
-    )
+    @hotspot_registration = HotspotRegistration.find_by_device_address(params[:id])
 
     respond_to do |format|
-      if @hotspot_registration.authorized?
+      if @hotspot_registration.try(:authorized?)
         format.html { render :thank_you }
       else
+        @hotspot_registration = HotspotRegistration.new(
+          device_address: hotspot_registration_params[:id],
+          access_point_address: hotspot_registration_params[:ap]
+        )
         format.html { render :new }
       end
     end
