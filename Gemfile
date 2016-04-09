@@ -15,6 +15,7 @@ gem 'bootswatch-rails'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'devise'
 gem 'troupe'
+gem 'nokogiri', '1.6.7.2'
 
 group :development, :test do
   gem 'byebug'

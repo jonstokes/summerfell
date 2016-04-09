@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   root 'homepage#index'
-  
+
+  get "/guest" => "portals#guest"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
