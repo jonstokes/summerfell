@@ -16,6 +16,10 @@ gem 'devise'
 gem 'troupe'
 gem 'nokogiri', '1.6.7.2'
 gem 'puma'
+gem 'money-rails', '~> 1.4.1'
+gem 'virtus'
+gem 'mac_address'
+gem 'unifi', git: 'http://github.com/collectiveidea/unifi.git', branch: 'master'
 
 group :development, :test do
   gem 'byebug'
@@ -23,9 +27,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'factory_girl_rails', '~> 4.2'
-  gem 'pry'
-  gem 'rspec-rails'
+  gem 'forgery'
 end
 
 group :development do
@@ -37,7 +39,10 @@ group :development do
 end
 
 group :test do
+  gem 'factory_girl_rails', '~> 4.2'
+  gem 'rspec-rails'
   gem 'database_cleaner', '~> 1.0'
+  gem 'webmock'
 end
 
 
