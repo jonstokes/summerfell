@@ -1,3 +1,8 @@
+$(document).on('change', '#hotspot_registration_terms', function() {
+  $("#terms").slideToggle( "fast");
+  $("#payment-details").slideToggle( "fast");
+});
+
 jQuery(function ($) {
   var show_error, stripeResponseHandler;
 
@@ -13,7 +18,7 @@ jQuery(function ($) {
   stripeResponseHandler = function (status, response) {
     var $form, token;
     $form = $("#new_hotspot_registration");
-    
+
     if (response.error) {
       show_error(response.error.message);
       $form.find("input[type=submit]").prop("disabled", false);
