@@ -17,34 +17,12 @@ ActiveRecord::Schema.define(version: 20160409195155) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "billing_informations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "user_id",                          null: false
-    t.string   "phone",                limit: 255
-    t.string   "token",                limit: 255, null: false
-    t.string   "cc_full_name",         limit: 255, null: false
-    t.string   "cc_last_4",            limit: 255, null: false
-    t.string   "cc_expiry_month",      limit: 255, null: false
-    t.string   "cc_expiry_year",       limit: 255, null: false
-    t.string   "address_company_name", limit: 255
-    t.string   "address_full_name",    limit: 255, null: false
-    t.string   "address_street",       limit: 255, null: false
-    t.string   "address_unit",         limit: 255
-    t.string   "address_city",         limit: 255, null: false
-    t.string   "address_state",        limit: 255, null: false
-    t.string   "address_zip_code",     limit: 255, null: false
-    t.string   "address_country",      limit: 255, null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-  end
-
-  add_index "billing_informations", ["user_id"], name: "index_billing_informations_on_user_id", using: :btree
-
   create_table "guests", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "transaction_id"
     t.macaddr  "device_address",       null: false
+    t.macaddr  "access_point_address", null: false
     t.uuid     "package_id",           null: false
     t.string   "email"
-    t.macaddr  "access_point_address", null: false
+    t.boolean  "terms",                null: false
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -77,23 +55,6 @@ ActiveRecord::Schema.define(version: 20160409195155) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end
-
-  create_table "service_informations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "user_id",                          null: false
-    t.string   "phone",                limit: 255
-    t.string   "address_company_name", limit: 255
-    t.string   "address_full_name",    limit: 255, null: false
-    t.string   "address_street",       limit: 255, null: false
-    t.string   "address_unit",         limit: 255
-    t.string   "address_city",         limit: 255, null: false
-    t.string   "address_state",        limit: 255, null: false
-    t.string   "address_zip_code",     limit: 255, null: false
-    t.string   "address_country",      limit: 255, null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-  end
-
-  add_index "service_informations", ["user_id"], name: "index_service_informations_on_user_id", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
