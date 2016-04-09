@@ -29,7 +29,7 @@
     Choose a WiFi access package from options below. All Summerfell Turbo packages are 10Mbps/10Mbps, with no download quotas.
   </p>
 
-  <div class="form-group">
+  <div class="well">
     <% packages.each do |package| %>
       <div class="radio" style="margin-left: 30px; padding-bottom: 10px;">
         <%= f.radio_button :package_id, package.id %>
@@ -47,28 +47,40 @@
     </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, class: "form-control", "data-stripe" => "email" %>
+  <div id="terms">
+    <div class="panel panel-primary">
+      <div class="panel-heading">TERMS AND CONDITIONS OF USE</div>
+      <div class="panel-body" style="max-height: 200px; overflow-y: scroll;">
+        <%= render 'terms' %>
+      </div>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= label_tag "Card Number", nil, required: true %>
-    <%= text_field_tag :card_number, nil, class: "form-control", "data-stripe" => "number" %>
+  <div id="payment-details" style="display: none;">
+    <div class="form-group">
+      <%= f.label :email, required: true %>
+      <%= f.email_field :email, class: "form-control", "data-stripe" => "email" %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "Card Number", nil, required: true %>
+      <%= text_field_tag :card_number, nil, class: "form-control", "data-stripe" => "number" %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "Card Verification", nil, required: true %>
+      <%= text_field_tag :card_verification, nil, class: "form-control", "data-stripe" => "cvv" %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "Card Expires", nil, required: true %>
+      <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, "data-stripe" => "exp-month", class: "form-control" %>
+      <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, "data-stripe" => "exp-year", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Registration Payment", class: "btn btn-default", style: "color: white;background: rgb(242, 118, 73);" %>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= label_tag "Card Verification", nil, required: true %>
-    <%= text_field_tag :card_verification, nil, class: "form-control", "data-stripe" => "cvv" %>
-  </div>
-
-  <div class="form-group">
-    <%= label_tag "Card Expires", nil, required: true %>
-    <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, "data-stripe" => "exp-month", class: "form-control" %>
-    <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, "data-stripe" => "exp-year", class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit "Registration Payment", class: "btn btn-default", style: "color: white;background: rgb(242, 118, 73);" %>
-  </div>
 <% end %>
