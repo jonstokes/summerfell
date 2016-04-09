@@ -1,10 +1,9 @@
 class Package < ActiveRecord::Base
   has_many :guests
-  
+
   monetize :price_cents
 
   scope :paid, -> { where("price_cents > '0.0'::money").order("price_cents DESC") }
-  scope :free, -> { where("price_cents = '0.0'::money") }
 
   validates :name, :description, :charged_as, presence: true
   validates :price_cents, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -16,5 +15,9 @@ class Package < ActiveRecord::Base
 
   def free?
     price_cents == 0
+  end
+
+  def self.free
+    @free_package ||= Package.where("price_cents = '0.0'::money").first
   end
 end

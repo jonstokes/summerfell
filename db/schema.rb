@@ -18,11 +18,10 @@ ActiveRecord::Schema.define(version: 20160130144916) do
   enable_extension "uuid-ossp"
 
   create_table "guests", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "transaction_id"
     t.macaddr  "device_address",       null: false
+    t.macaddr  "access_point_address", null: false
     t.uuid     "package_id",           null: false
     t.string   "email"
-    t.macaddr  "access_point_address", null: false
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
