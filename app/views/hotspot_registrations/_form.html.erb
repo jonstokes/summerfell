@@ -1,0 +1,17 @@
+<%= form_for(@hotspot_registration) do |f| %>
+  <% if @hotspot_registration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hotspot_registration.errors.count, "error") %> prohibited this hotspot_registration from being saved:</h2>
+
+      <ul>
+      <% @hotspot_registration.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
