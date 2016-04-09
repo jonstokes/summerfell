@@ -20,6 +20,7 @@ gem 'money-rails', '~> 1.4.1'
 gem 'virtus'
 gem 'mac_address'
 gem 'unifi', git: 'http://github.com/collectiveidea/unifi.git', branch: 'master'
+gem 'stripe'
 
 group :development, :test do
   gem 'byebug'
