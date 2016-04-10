@@ -4,7 +4,7 @@
 
 <script>Stripe.setPublishableKey('<%= Figaro.env.stripe_publishable_key %>');</script>
 
-<%= form_for @hotspot_registration, html: { class: "basic-grey" } do |f| %>
+<%= form_for @hotspot_registration, html: { class: "form-horizontal", role: "form" } do |f| %>
   <div id="flash-messages">
     <% if @hotspot_registration.errors.any? %>
       <div class="alert alert-info alert-dismissable">
@@ -57,28 +57,38 @@
   </div>
 
   <div id="payment-details" style="display: none;">
-    <div class="form-group">
-      <%= f.label :email, required: true %>
+    <div class="form-group required col-sm-8">
+      <%= f.label :email %>
       <%= f.email_field :email, class: "form-control", "data-stripe" => "email" %>
     </div>
 
-    <div class="form-group">
+    <div class="clearfix"></div>
+
+    <div class="form-group col-sm-5">
       <%= label_tag "Card Number", nil, required: true %>
       <%= text_field_tag :card_number, nil, class: "form-control", "data-stripe" => "number" %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group col-sm-3" style="margin-left: 5px;">
       <%= label_tag "Card Verification", nil, required: true %>
       <%= text_field_tag :card_verification, nil, class: "form-control", "data-stripe" => "cvv" %>
     </div>
 
-    <div class="form-group">
-      <%= label_tag "Card Expires", nil, required: true %>
+    <div class="clearfix"></div>
+
+    <div class="form-group col-sm-3">
+      <%= label_tag "Card Expiration Month", nil, required: true %>
       <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, "data-stripe" => "exp-month", class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-3" style="margin-left: 5px;">
+      <%= label_tag "Card Expiration Year", nil, required: true %>
       <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, "data-stripe" => "exp-year", class: "form-control" %>
     </div>
 
-    <div class="form-group">
+    <div class="clearfix"></div>
+
+    <div class="form-group col-sm-9">
       <%= f.submit "Registration Payment", class: "btn btn-default", style: "color: white;background: rgb(242, 118, 73);" %>
     </div>
   </div>
