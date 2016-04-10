@@ -13,7 +13,7 @@ class HotspotRegistrationsController < ApplicationController
 
     respond_to do |format|
       if @hotspot_registration.try(:authorized?)
-        format.html { render :thank_you }
+        format.html { render :show }
       else
         @hotspot_registration = HotspotRegistration.new(
           device_address: hotspot_registration_params[:id],
