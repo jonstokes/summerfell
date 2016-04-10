@@ -13,12 +13,12 @@ class AuthorizeGuest
     self.login_response = unifi_controller.login
     self.authorize_guest_response = unifi_controller.authorize_guest(
       mac:     guest.device_address,
-      minutes: guest.plan.duration_minutes,
-      down:    guest.plan.limit_down,
-      up:      guest.plan.limit_up,
-      quota:   guest.plan.limit_quota
+      minutes: guest.package.duration_minutes,
+      down:    guest.package.limit_down,
+      up:      guest.package.limit_up,
+      quota:   guest.package.limit_quota
     )
-    context.fail!(error: 'authorization_failed') unless authorize_guest_response.code == 200 
+    context.fail!(error: 'authorization_failed') unless authorize_guest_response.code == 200
   ensure
     self.logout_response = unifi_controller.logout
   end

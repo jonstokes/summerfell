@@ -33,7 +33,7 @@ class HotspotRegistrationsController < ApplicationController
       if @hotspot_registration.valid?
         @hotspot_registration.process_payment
         @hotspot_registration.save
-
+        AuthorizeGuest.call(guest: @hotspot_registration)
         format.html { redirect_to @hotspot_registration, notice: 'Hotspot registration was successfully created.' }
       else
         format.html { render :new }
