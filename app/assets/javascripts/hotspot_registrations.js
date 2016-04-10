@@ -1,5 +1,5 @@
-$(document).on('change', '#hotspot_registration_terms', function() {
-  $("#terms").slideToggle( "fast");
+$(document).on('change', '#terms', function() {
+  $("#terms-panel").slideToggle( "fast");
   $("#payment-details").slideToggle( "fast");
 });
 

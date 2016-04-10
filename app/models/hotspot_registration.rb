@@ -5,7 +5,6 @@ class HotspotRegistration < ActiveRecord::Base
   validates :device_address, presence: true
   validates :access_point_address, presence: true
   validates :email, presence: true
-  validates :terms, :inclusion => {:in => [true, false]}
 
   validate :valid_device_address
   validate :valid_access_point_address

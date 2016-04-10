@@ -59,6 +59,6 @@ class HotspotRegistrationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotspot_registration_params
-      params.permit(:id, :ap, :url, hotspot_registration: [:package_id, :terms, :device_address, :access_point_address, :url, :email, :card_token])
+      params.permit(:id, :ap, :url, hotspot_registration: [:package_id, :device_address, :access_point_address, :url, :email, :card_token])
     end
 end

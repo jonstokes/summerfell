@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20160409195155) do
     t.macaddr  "access_point_address", null: false
     t.uuid     "package_id",           null: false
     t.string   "email"
-    t.boolean  "terms",                null: false
     t.string   "card_token"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false

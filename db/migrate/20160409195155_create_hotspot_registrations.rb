@@ -5,7 +5,6 @@ class CreateHotspotRegistrations < ActiveRecord::Migration
       t.macaddr :access_point_address, null: false
       t.uuid    :package_id, null: false
       t.string  :email
-      t.boolean :terms, null: false
       t.string  :card_token
 
       t.timestamps null: false
