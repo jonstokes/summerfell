@@ -26,7 +26,10 @@
   </div>
 
   <p style="margin-bottom: 20px;">
-    Choose a WiFi access package from options below. All Summerfell Turbo packages are 10Mbps/10Mbps, with no download quotas.
+    Choose a WiFi access package from options below.
+    All Summerfell Turbo packages are <strong>10Mbps/10Mbps</strong>, with <strong>no download quotas</strong>.
+    Note that your actual wireless bandwidth will vary depending on your distance from the access point,
+    intervening obstacles, atmospheric conditions, your wireless hardware, and other factors.
   </p>
 
   <div class="well">
@@ -69,7 +72,7 @@
       <%= text_field_tag :card_number, nil, class: "form-control", "data-stripe" => "number" %>
     </div>
 
-    <div class="form-group col-sm-3" style="margin-left: 5px;">
+    <div class="form-group col-sm-3">
       <%= label_tag "Card Verification", nil, required: true %>
       <%= text_field_tag :card_verification, nil, class: "form-control", "data-stripe" => "cvv" %>
     </div>
@@ -81,7 +84,7 @@
       <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, "data-stripe" => "exp-month", class: "form-control" %>
     </div>
 
-    <div class="form-group col-sm-3" style="margin-left: 5px;">
+    <div class="form-group col-sm-3">
       <%= label_tag "Card Expiration Year", nil, required: true %>
       <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, "data-stripe" => "exp-year", class: "form-control" %>
     </div>

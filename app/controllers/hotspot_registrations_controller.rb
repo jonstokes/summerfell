@@ -1,4 +1,5 @@
 class HotspotRegistrationsController < ApplicationController
+  layout 'hotspot'
   before_action :set_hotspot_registration, only: [:show]
 
   # GET /hotspot_registrations/1
