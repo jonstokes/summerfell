@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
+  resources :hotspot_registrations
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   root 'homepage#index'
 
-  get "/guest/s/default/" => "portals#guest"
+  get "/guest/s/default/" => "hotspot_registrations#new"
+
+  namespace :admin do
+    resources :hotspot_registrations
+    resources :packages
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

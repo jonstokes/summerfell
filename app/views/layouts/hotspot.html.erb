@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Summerfell</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="main-container" class="container-fluid">
+    <div class="row">
+      <div id="main-content">
+        <!--  main content -->
+        <div class="col-sm-1 col-md-3"></div>
+        <div class="col-xs-12 col-sm-9 col-md-6">
+          <%= yield %>
+        </div>
+        <div class="col-sm-1 col-md-3"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

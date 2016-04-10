@@ -1,0 +1,106 @@
+<%= javascript_include_tag "https://js.stripe.com/v2/" %>
+
+<script>Stripe.setPublishableKey('<%= Figaro.env.stripe_publishable_key %>');</script>
+
+<div class="col-xs-12">
+  <h1>Summerfell Turbo WiFi Registration</h1>
+</div>
+
+<%= form_for @hotspot_registration, html: { class: "form-horizontal", role: "form" } do |f| %>
+  <div id="flash-messages" class="col-xs-12">
+    <% if @hotspot_registration.errors.any? %>
+    <div class="alert alert-warning">
+      <a class="close" data-dismiss="alert">×</a>
+      <div id="flash_alert">
+        <ul>
+          <% @hotspot_registration.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.hidden_field :card_token %>
+    <%= f.hidden_field :device_address %>
+    <%= f.hidden_field :access_point_address %>
+  </div>
+
+  <div style="margin-bottom: 20px;" class="col-xs-11">
+    <p>
+      Choose a WiFi access package from options below.
+      All Summerfell Turbo packages are <strong>10Mbps/10Mbps</strong>, with <strong>no download quotas</strong>.
+      Note that your actual wireless bandwidth will vary depending on your distance from the access point,
+      intervening obstacles, atmospheric conditions, your wireless hardware, and other factors.
+    </p>
+  </div>
+
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <% packages.each do |package| %>
+        <div class="radio" style="margin-left: 30px; padding-bottom: 10px;">
+          <%= f.radio_button :package_id, package.id %>
+          <%= f.label :package_id do %>
+            <strong><%= package.name %></strong>&nbsp; &mdash; &nbsp; $<%= package.price %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group col-xs-12">
+    <div class="checkbox" style="margin-left: 40px; padding-bottom: 10px;">
+      <%= check_box_tag :terms %>
+      <%= label_tag :terms, 'I Accept the Terms and Conditions' %><br />
+    </div>
+  </div>
+
+  <div id="terms-panel" class="col-xs-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">TERMS AND CONDITIONS OF USE</div>
+      <div class="panel-body" style="max-height: 200px; overflow-y: scroll;">
+        <%= render 'terms' %>
+      </div>
+    </div>
+  </div>
+
+  <div id="payment-details" class="col-xs-12" style="display: none;">
+    <div class="form-group required col-sm-8">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: "form-control", "data-stripe" => "email" %>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-group col-sm-5">
+      <%= label_tag "Card Number", nil, required: true %>
+      <%= text_field_tag :card_number, nil, class: "form-control", "data-stripe" => "number" %>
+    </div>
+
+    <div class="form-group col-sm-3">
+      <%= label_tag "Verification", nil, required: true %>
+      <%= text_field_tag :card_verification, nil, class: "form-control", "data-stripe" => "cvv" %>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-group col-sm-4">
+      <%= label_tag "Exp Month", nil, required: true %>
+      <%= select_tag :exp_month, options_for_select(Date::MONTHNAMES.compact.each_with_index.map { |name,i| ["#{i+1} - #{name}", i+1] }), include_blank: false, "data-stripe" => "exp-month", class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-3">
+      <%= label_tag "Exp Year", nil, required: true %>
+      <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, "data-stripe" => "exp-year", class: "form-control" %>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="form-group col-sm-9">
+      <%= f.submit "Registration Payment", class: "btn btn-default", style: "color: white;background: rgb(242, 118, 73);" %>
+    </div>
+  </div>
+
+<% end %>
