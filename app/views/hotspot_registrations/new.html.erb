@@ -41,7 +41,7 @@
     <div class="panel panel-default">
       <% packages.each do |package| %>
         <div class="radio" style="margin-left: 30px; padding-bottom: 10px;">
-          <%= f.radio_button :package_id, package.id %>
+          <%= f.radio_button :package_id, package.id, data: { free: package.free? } %>
           <%= f.label :package_id do %>
             <strong><%= package.name %></strong>&nbsp; &mdash; &nbsp; $<%= package.price %>
           <% end %>
@@ -66,14 +66,14 @@
     </div>
   </div>
 
-  <div id="payment-details" class="col-xs-12" style="display: none;">
+  <div id="email-field" class="col-xs-12" style="display: none;">
     <div class="form-group required col-sm-8">
       <%= f.label :email %>
       <%= f.email_field :email, class: "form-control", "data-stripe" => "email" %>
     </div>
+  </div>
 
-    <div class="clearfix"></div>
-
+  <div id="payment-details" class="col-xs-12" style="display: none;">
     <div class="form-group col-sm-5">
       <%= label_tag "Card Number", nil, required: true %>
       <%= text_field_tag :card_number, nil, class: "form-control", "data-stripe" => "number" %>
@@ -95,12 +95,13 @@
       <%= label_tag "Exp Year", nil, required: true %>
       <%= select_tag :exp_year, options_for_select((Date.today.year..(Date.today.year+10)).to_a), include_blank: false, "data-stripe" => "exp-year", class: "form-control" %>
     </div>
+  </div>
 
-    <div class="clearfix"></div>
-
+  <div id="register-button" class="col-xs-12" style="display: none;">
     <div class="form-group col-sm-9">
-      <%= f.submit "Registration Payment", class: "btn btn-default", style: "color: white;background: rgb(242, 118, 73);" %>
+      <%= f.submit "Register", class: "btn btn-default", style: "color: white;background: rgb(242, 118, 73);" %>
     </div>
   </div>
+
 
 <% end %>

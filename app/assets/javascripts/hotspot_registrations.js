@@ -1,7 +1,34 @@
+
+function configurePaymentDetails() {
+  if($('#terms').is(':checked')) {
+    if($('input[type=radio][data-free=true]').is(':checked')) {
+      $("#payment-details").hide();
+    } else {
+      $('input[type=radio][data-free=false]').each(function(index, element) {
+        if($(this).is(':checked')) {
+          $("#email-field").show();
+          $("#payment-details").show();
+        }
+      })
+    };
+    $("#terms-panel").hide();
+    $("#register-button").show();
+  } else {
+    $("#terms-panel").show();
+    $("#email-field").hide();
+    $("#register-button").hide();
+    $("#payment-details").hide();
+  }
+}
+
 $(document).on('change', '#terms', function() {
-  $("#terms-panel").slideToggle( "fast");
-  $("#payment-details").slideToggle( "fast");
+  configurePaymentDetails();
 });
+
+$(document).on('change', 'input[type=radio]', function() {
+  configurePaymentDetails();
+});
+
 
 jQuery(function ($) {
   var show_error, stripeResponseHandler;
