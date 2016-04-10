@@ -1,1 +1,1 @@
-rbenv sudo passenger start -p80 -e production --ssl --ssl-certificate main.cert --ssl-certificate-key main.key --ssl-port 443 &
+rbenv sudo passenger start -p80 -e production --ssl --ssl-certificate summerfell.crt --ssl-certificate-key summerfell.key --ssl-port 443 &
