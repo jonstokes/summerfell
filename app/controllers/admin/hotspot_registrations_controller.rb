@@ -4,7 +4,7 @@ class Admin::HotspotRegistrationsController < Admin::BaseController
   # GET /admin/guests
   # GET /admin/guests.json
   def index
-    @guests = HotspotRegistration.all
+    @hotspot_registrations = HotspotRegistration.all
   end
 
   # GET /admin/guests/1
@@ -14,7 +14,7 @@ class Admin::HotspotRegistrationsController < Admin::BaseController
 
   # GET /admin/guests/new
   def new
-    @guest = HotspotRegistration.new
+    @hotspot_registration = HotspotRegistration.new
   end
 
   # GET /admin/guests/1/edit
@@ -24,15 +24,15 @@ class Admin::HotspotRegistrationsController < Admin::BaseController
   # POST /admin/guests
   # POST /admin/guests.json
   def create
-    @guest = HotspotRegistration.new(guest_params)
+    @hotspot_registration = HotspotRegistration.new(guest_params)
 
     respond_to do |format|
-      if @guest.save
-        format.html { redirect_to @guest, notice: 'Guest was successfully created.' }
-        format.json { render :show, status: :created, location: @guest }
+      if @hotspot_registration.save
+        format.html { redirect_to @hotspot_registration, notice: 'Guest was successfully created.' }
+        format.json { render :show, status: :created, location: @hotspot_registration }
       else
         format.html { render :new }
-        format.json { render json: @guest.errors, status: :unprocessable_entity }
+        format.json { render json: @hotspot_registration.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +41,12 @@ class Admin::HotspotRegistrationsController < Admin::BaseController
   # PATCH/PUT /admin/guests/1.json
   def update
     respond_to do |format|
-      if @guest.update(guest_params)
-        format.html { redirect_to @guest, notice: 'Guest was successfully updated.' }
-        format.json { render :show, status: :ok, location: @guest }
+      if @hotspot_registration.update(guest_params)
+        format.html { redirect_to @hotspot_registration, notice: 'Guest was successfully updated.' }
+        format.json { render :show, status: :ok, location: @hotspot_registration }
       else
         format.html { render :edit }
-        format.json { render json: @guest.errors, status: :unprocessable_entity }
+        format.json { render json: @hotspot_registration.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,7 +54,7 @@ class Admin::HotspotRegistrationsController < Admin::BaseController
   # DELETE /admin/guests/1
   # DELETE /admin/guests/1.json
   def destroy
-    @guest.destroy
+    @hotspot_registration.destroy
     respond_to do |format|
       format.html { redirect_to admin_guests_url, notice: 'Guest was successfully destroyed.' }
       format.json { head :no_content }
@@ -64,7 +64,7 @@ class Admin::HotspotRegistrationsController < Admin::BaseController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_guest
-      @guest = HotspotRegistration.find(params[:id])
+      @hotspot_registration = HotspotRegistration.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
