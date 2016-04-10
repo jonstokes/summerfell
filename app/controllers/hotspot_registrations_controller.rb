@@ -13,7 +13,6 @@ class HotspotRegistrationsController < ApplicationController
 
     respond_to do |format|
       if @hotspot_registration.try(:authorized?)
-        AuthorizeGuest.call(guest: @hotspot_registration)
         format.html { render :show }
       else
         @hotspot_registration = HotspotRegistration.new(
