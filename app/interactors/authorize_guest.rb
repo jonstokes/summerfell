@@ -18,7 +18,7 @@ class AuthorizeGuest
       up:      guest.package.limit_up,
       quota:   guest.package.limit_quota
     )
-    context.fail!(error: 'authorization_failed') unless authorize_guest_response.code == 200
+    context.fail!(error: 'authorization_failed') unless authorize_guest_response.status == 200
   ensure
     self.logout_response = unifi_controller.logout
   end
