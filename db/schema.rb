@@ -17,18 +17,6 @@ ActiveRecord::Schema.define(version: 20160409195155) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "guests", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.macaddr  "device_address",       null: false
-    t.macaddr  "access_point_address", null: false
-    t.uuid     "package_id",           null: false
-    t.string   "email"
-    t.boolean  "terms",                null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "guests", ["device_address"], name: "index_guests_on_device_address", using: :btree
-
   create_table "hotspot_registrations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.macaddr  "device_address",       null: false
     t.macaddr  "access_point_address", null: false
