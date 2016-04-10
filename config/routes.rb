@@ -9,15 +9,8 @@ Rails.application.routes.draw do
   get "/guest/s/default/" => "hotspot_registrations#new"
 
   namespace :admin do
-    resources :guests
+    resources :hotspot_registrations
     resources :packages
-  end
-
-  namespace :api, path: "", defaults: {format: :json}  do
-    namespace :v1 do
-      resources :guest, only: [:create, :authorize]
-      get "/packages/available" => "packages#available"
-    end
   end
 
   # Example of regular route:

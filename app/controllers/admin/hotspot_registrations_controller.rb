@@ -1,10 +1,10 @@
-class Admin::GuestsController < Admin::BaseController
+class Admin::HotspotRegistrationsController < Admin::BaseController
   before_action :set_guest, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/guests
   # GET /admin/guests.json
   def index
-    @guests = Guest.all
+    @guests = HotspotRegistration.all
   end
 
   # GET /admin/guests/1
@@ -14,7 +14,7 @@ class Admin::GuestsController < Admin::BaseController
 
   # GET /admin/guests/new
   def new
-    @guest = Guest.new
+    @guest = HotspotRegistration.new
   end
 
   # GET /admin/guests/1/edit
@@ -24,7 +24,7 @@ class Admin::GuestsController < Admin::BaseController
   # POST /admin/guests
   # POST /admin/guests.json
   def create
-    @guest = Guest.new(guest_params)
+    @guest = HotspotRegistration.new(guest_params)
 
     respond_to do |format|
       if @guest.save
@@ -64,7 +64,7 @@ class Admin::GuestsController < Admin::BaseController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_guest
-      @guest = Guest.find(params[:id])
+      @guest = HotspotRegistration.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
