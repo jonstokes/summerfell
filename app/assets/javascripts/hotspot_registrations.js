@@ -37,9 +37,13 @@ jQuery(function ($) {
     var $form;
     $form = $(this);
 
-    $form.find("input[type=submit]").prop("disabled", true);
-    Stripe.card.createToken($form, stripeResponseHandler);
-    return false;
+    if(!$('input[type=radio][data-free=true]').is(':checked')) {
+      $form.find("input[type=submit]").prop("disabled", true);
+      Stripe.card.createToken($form, stripeResponseHandler);
+      return false;
+    } else {
+      $form.get(0).submit();
+    };
   });
 
   stripeResponseHandler = function (status, response) {

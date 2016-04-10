@@ -4,7 +4,7 @@ class HotspotRegistration < ActiveRecord::Base
   validates :package_id, presence: true
   validates :device_address, presence: true
   validates :access_point_address, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, if: ->{ package_id != Package.free.id }
 
   validate :valid_device_address
   validate :valid_access_point_address

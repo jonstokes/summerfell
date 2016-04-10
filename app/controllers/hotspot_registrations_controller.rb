@@ -31,7 +31,7 @@ class HotspotRegistrationsController < ApplicationController
 
     respond_to do |format|
       if @hotspot_registration.valid?
-        @hotspot_registration.process_payment
+        @hotspot_registration.process_payment unless @hotspot_registration.package.free?
         @hotspot_registration.save
         AuthorizeGuest.call(guest: @hotspot_registration)
         format.html { redirect_to @hotspot_registration, notice: 'Hotspot registration was successfully created.' }
