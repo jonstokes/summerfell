@@ -34,7 +34,7 @@ class HotspotRegistration < ActiveRecord::Base
   def can_use_free_package?
     return false unless device_address.present?
     return true unless previous_session = HotspotRegistration.find_previous_free_session(device_address)
-    Time.current > (previous_session.expired_at + 24.hours)
+    Time.current > (previous_session.expires_at + 24.hours)
   end
 
   def valid_for_free_package
