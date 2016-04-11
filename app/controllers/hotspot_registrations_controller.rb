@@ -13,12 +13,19 @@ class HotspotRegistrationsController < ApplicationController
 
     respond_to do |format|
       if @hotspot_registration.try(:authorized?)
-        format.html { render :show }
+        format.all { redirect_to redirect_url }
       else
         @hotspot_registration = HotspotRegistration.new(
           device_address: hotspot_registration_params[:id],
           access_point_address: hotspot_registration_params[:ap]
         )
+
+        # Authorize guest for 5 mins so they can pay with Stripe.js
+        TemporaryAuthorizeGuest.call(
+          device_address: @hotspot_registration.device_address,
+          duration_minutes: 5
+        )
+
         format.html { render :new }
       end
     end
@@ -51,6 +58,13 @@ class HotspotRegistrationsController < ApplicationController
   helper_method :packages
 
   private
+
+  def redirect_url
+    return Figaro.env.app_host unless params[:url] && URI.parse(params[:url]).host
+    params[:url]
+  rescue URI::InvalidURIError
+    Figaro.env.app_host
+  end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_hotspot_registration
