@@ -11,20 +11,29 @@ class HotspotRegistrationsController < ApplicationController
   def new
     @hotspot_registration = HotspotRegistration.find_by_device_address(params[:id])
 
+    Rails.env.info "--- Checking MAC #{@hotspot_registration.device_address}"
+
     respond_to do |format|
       if @hotspot_registration.try(:authorized?)
+        Rails.env.info "--- MAC #{@hotspot_registration.device_address} is authorized!"
         format.all { redirect_to redirect_url }
       else
+        Rails.env.info "--- Registering MAC #{@hotspot_registration.device_address}..."
+
         @hotspot_registration = HotspotRegistration.new(
           device_address: hotspot_registration_params[:id],
           access_point_address: hotspot_registration_params[:ap]
         )
+
+        Rails.env.info "------ temporary auth of MAC #{@hotspot_registration.device_address}..."
 
         # Authorize guest for 5 mins so they can pay with Stripe.js
         TemporaryAuthorizeGuest.call(
           device_address: @hotspot_registration.device_address,
           duration_minutes: 5
         )
+
+        Rails.env.info "------ reg screen for MAC #{@hotspot_registration.device_address}"
 
         format.html { render :new }
       end
