@@ -2,8 +2,17 @@
 <html>
 <head>
   <title>Summerfell</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <script>
+    $.ajax({
+      url: "<%= Figaro.env.app_host %>/temporary_authorization/?id=<%= @hotspot_registration.device_address %>"
+    });
+  </script>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>

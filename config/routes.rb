@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :hotspot_registrations
+  resources :hotspot_registrations, only: [:new, :create, :show]
+
+  get "/temporary_authorization" => "hotspot_registrations#temporary_authorization"
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
