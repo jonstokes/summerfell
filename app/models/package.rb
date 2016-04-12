@@ -6,7 +6,7 @@ class Package < ActiveRecord::Base
   scope :paid, -> { where("price_cents > '0.0'::money").order("price_cents DESC") }
 
   validates :name, :description, :charged_as, presence: true
-  validates :price_cents, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :price_cents, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :duration_minutes, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :limit_up, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, if: :limit_up
   validates :limit_down, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, if: :limit_down
