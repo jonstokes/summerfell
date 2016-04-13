@@ -2,9 +2,9 @@ class TemporaryAuthorizeGuest
   include Troupe
 
   expects :device_address
-  permits(:limit_up) { 3 * 1000 }
-  permits(:limit_down) { 3 * 1000 }
-  permits(:duration_minutes) { 3 }
+  permits(:limit_up) { 10 * 1000 }
+  permits(:limit_down) { 10 * 1000 }
+  permits(:duration_minutes) { 5 }
 
   provides :unifi_controller do
     Unifi::Controller.new(host: Figaro.env.unifi_host)
