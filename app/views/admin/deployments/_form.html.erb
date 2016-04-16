@@ -1,0 +1,17 @@
+<%= form_for(@admin_deployment) do |f| %>
+  <% if @admin_deployment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_deployment.errors.count, "error") %> prohibited this admin_deployment from being saved:</h2>
+
+      <ul>
+      <% @admin_deployment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
