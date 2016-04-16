@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :inventory_items
+  end
   resources :hotspot_registrations, only: [:new, :create, :show]
 
   get "/temporary_authorization" => "hotspot_registrations#temporary_authorization"
