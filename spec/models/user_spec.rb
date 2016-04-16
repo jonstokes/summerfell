@@ -18,6 +18,18 @@ RSpec.describe User, type: :model do
       expect(subject).not_to be_valid
     end
 
+    it "requires a role" do
+      subject.role = nil
+      expect(subject).not_to be_valid
+    end
+
+    it "requires a role be one of admin or user" do
+      expect {
+        subject.role = :foo
+      }.to raise_error(ArgumentError)
+
+    end
+
     it "does not require a password for an existing record" do
       subject.save
       user = User.first
